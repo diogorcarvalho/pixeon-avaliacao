@@ -1,0 +1,46 @@
+﻿-## Relatório Técnico ##-
+
+
+Sobre Single Page Application (SPA)
+Forma de desenvolver páginas web para se comportar como um aplicações descktop, de modo fazer amplo uso das tecnologias HTML5 (Ajax, JSON, Websocket, Requisições assíncrona, WebStorage, etc), oferecendo também melhor performance do cliente (navegador) e melhor uso dos recurso da rede e do back-end, pois nas páginas html são carregadas sobe demanda. Outra característica importante é o uso off-line.
+
+
+Sobre AngularJS
+Framework Javascript open source baseado em SPA, MVC, MVP e MVVM mantido pelo Google e grande comunidade ativa  na internet. Trata-se de um conjunto de ferramentas e recursos, dentre elas: two-way data-binding, extender HTML, controle dinâmico do DOM, etc. Fácil curva de aprendizagem.
+
+
+Trabalho Realizado - Descrever o algoritmo utilizado para resolver o problema da combinação.
+O algorítimo foi divido em três funções, a primeira delas - unique - foi aplicado no prototype da classe Array. Esta função elimina as repetições de elemento. Em seguida os elementos são ordenado usando o método - nativo - “sort” do próprio array.
+Segundo método “removeSpaces”, como o nome já diz, remove todos os elementos de espaço.
+Terceiro método “combinations” faz o trabalho das combinações em si, ele recebe o array resultante dos processos descritos a cina, primeiramente realizando todas as combinações possíveis, em seguida é coletado apenas os elementos que contem o “length” igual ao número passado por parâmetro na função.
+Por fim, encapsulo todas esta funções em uma com o nome de “process”, esta por sua vês, entrega o produto final convertido em “string” para melhor ser apresentada na view de aplicação.
+
+
+Escolhas importantes realizada no percurso
+Na criação do ambiente de desenvolvimento, decidi não usar o gerador YeomanJs, pois como uso ambiente Windows, tive problemas na hora da criação.
+Uma vez criado todo o ambiente via terminal, usei o Visual Studio 2015 por já esta familiarizado e por ele oferecer todas as ferramente necessária para o desenvolvimento front-end.
+Na parte de servido, decidi usar o “http-server -o” pois é simples e funcional. Poderia ter usado o do próprio Visual Studio, mas queria seguir a linha do nodejs mesmo.
+
+
+Facilidades e Dificuldades
+Tive dificuldade em alinhar a Api do Google de Autenticação com o AngularJS, precisei carrega los em momentos diferentes.
+Um dos requisitos era criar uma forma de logoff da aplicação, não consegui fazer esta funcionalidade funcionar. Pesquisando nos fóruns, constatei a função “gapi.auth.signOut()” não funciona quando a aplicação roda em “localhost”. Deve haver uma maneira mas infelizmente não encontrei. Não sou familiarizado com a API de Autenticação do Google.
+Para mim não houve facilidades, porem, este avaliação me ajudou a subir mais um degrau no meu conhecimento.
+
+
+Criando o Ambiente de Desenvolvimento
+* mkdir PixeonAvaliacao | cd PixeonAvaliacao
+* npm install -g grunt gulp bower http-server 
+* npm init (cria o arquivo “package.josn”)
+* bowere init (cria o quivo “bower.json”)
+* bower installl angular -save
+* bower installl angular-route -save
+* bower install jquery -save
+* bower install bootstrap -save
+* bower install font-awesome-less -save
+* http-server -o (sobe o servidor e abre com o navegador padrão)
+
+
+Requisitos não atendidos
+* Como falei anteriormente, tive problema em desenvolver a ação de Logoff do WebApp, segundo os foruns que pesquisei, a causa do problema é por conto de estar rodando em “localhost”, algo relacionado a segurança. Deve haver uma forma mas não consegui achar. Com isso reconheço a minha falta de conhecimento a cerca disso.
+* Por falta de conhecimento da Api de Autenticação do Google, também não consegui obter o e-mail do usuário - senso de urgência em aprender estes tópico - .

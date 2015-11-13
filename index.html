@@ -1,0 +1,94 @@
+﻿<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Pixeon - Avaliação</title>
+
+    <!-- Bootstrap -->
+    <link href="lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="app/css/theme.css" rel="stylesheet">
+
+    <!-- font-awesome -->
+    <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.min.css" />
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body ng-controller="mainController">
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="">Pixeon - Avaliação</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#/login">Login</a></li>
+                    <li><a href="#/application">Application</a></li>
+                </ul>
+            </div><!--/.nav-collapse -->
+        </div>
+    </nav>
+
+    <div class="container" role="main">
+        <ng-view></ng-view>
+    </div>   
+
+    <!-- Libs -->
+    <script src="lib/jquery/dist/jquery.min.js" type="text/javascript"></script>
+    <script src="lib/bootstrap/dist/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="lib/angular/angular.min.js" type="text/javascript"></script>
+    <script src="lib/angular-route/angular-route.min.js" type="text/javascript"></script>
+
+    <!-- App -->
+    <script src="app/app.js" type="text/javascript"></script>
+    <script src="app/login/loginController.js" type="text/javascript"></script>
+    <script src="app/login/loginService.js" type="text/javascript"></script>
+    <script src="app/application/applicationController.js" type="text/javascript"></script>
+    <script src="app/application/applicationService.js" type="text/javascript"></script>
+
+    <script type="text/javascript">
+        var clientId = '934711210741-3a1tnvvaqud1egc7pv1egoo7sli7lavm.apps.googleusercontent.com',
+            apiKey = 'KjTNBkRS5Buc4xmdSo7X4CmQ',
+            scopes = 'https://www.googleapis.com/auth/plus.me';
+        
+        var handleClientLoad = function () {            
+            gapi.client.setApiKey(apiKey);
+            window.setTimeout(function () {
+                gapi.auth.authorize({ client_id: clientId, scope: scopes, immediate: true }, function (authResult) {                                        
+                    if (authResult && !authResult.error) { // ### Logado ### //                        
+                        gapi.client.setApiKey();
+                        gapi.client.load('plus', 'v1').then(function () {
+                            gapi.client.plus.people.get({ 'userId': 'me' }).then(function (resp) {
+                                plusInfo = resp.result;
+                                angular.bootstrap(document, ['pixeonApp']);
+                                window.location = '#/application';
+                            }, function (reason) {
+                                console.log('Error: ' + reason.result.error.message);
+                            });
+                        });                        
+                    } else { // ### Deslogado ### //
+                        angular.bootstrap(document, ['pixeonApp']);
+                        window.location = '#/login';
+                    }
+                });
+            }, 1);
+        };
+    </script>
+    <script src="https://apis.google.com/js/client.js?onload=handleClientLoad"></script>
+
+</body>
+</html>
